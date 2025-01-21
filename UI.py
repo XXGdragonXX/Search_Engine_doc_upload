@@ -31,10 +31,10 @@ if process_url_clicked:
     with st.spinner("Loading Data from URLs..."):
            
         message = embedding_model(urls)
+        print(message) 
         
     st.success('Done!')
     
-print(message) 
 # vector_store = pickle.load(open("/mnt/data/vectors_index.pkl", "rb"))
 try:
     vector_store = st.session_state.vectors_index
