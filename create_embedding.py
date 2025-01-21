@@ -52,7 +52,7 @@ def embedding_model(urls):
     if os.path.exists("/mnt/data/vectors_index.pkl"):
         os.remove("/mnt/data/vectors_index.pkl") 
 
-    with open("/mnt/data/vectors_index.pkl"", "wb") as f:
+    with open("/mnt/data/vectors_index.pkl", "wb") as f:
         pickle.dump(vectors_index, f)
     
         
