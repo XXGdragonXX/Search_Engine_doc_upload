@@ -49,14 +49,15 @@ def embedding_model(urls):
         model_name="bert-base-nli-mean-tokens"
     )
     vectors_index = FAISS.from_documents(url_data, embeddings)
-    if os.path.exists("/mnt/data/vectors_index.pkl"):
-        os.remove("/mnt/data/vectors_index.pkl") 
+    file_path = "/mnt/data/vectors_index.pkl"
+    if os.path.exists(file_path):
+        # If file exists, remove it to regenerate
+        os.remove(file_path)
 
-    with open("/mnt/data/vectors_index.pkl", "wb") as f:
+    # Save the vectors index as a pickle file
+    with open(file_path, "wb") as f:
         pickle.dump(vectors_index, f)
-    
-        
-    
+
     return f"Vectors Index created and saved as vectors_index.pkl"
     
     
