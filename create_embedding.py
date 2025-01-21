@@ -3,6 +3,7 @@ from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTe
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
+import streamlit as st
 import pickle
 import os
 import nltk
