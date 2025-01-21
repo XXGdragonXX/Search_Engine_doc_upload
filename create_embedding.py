@@ -42,7 +42,7 @@ def split_text_into_chunks(data):
 
 
 
-def create_embedding_model(urls):
+def embedding_model(urls):
     url_loader = create_url_loader(urls)
     url_data = split_text_into_chunks(url_loader)
     embeddings = embeddings = HuggingFaceEmbeddings(
