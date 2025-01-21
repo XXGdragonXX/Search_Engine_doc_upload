@@ -30,7 +30,7 @@ if process_url_clicked:
     
     with st.spinner("Loading Data from URLs..."):
            
-        create_embedding_model(urls)
+        embedding_model(urls)
         
     st.success('Done!')
     
