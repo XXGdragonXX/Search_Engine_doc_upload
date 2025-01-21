@@ -3,7 +3,8 @@ from langchain_community.llms import HuggingFaceHub
 from langchain.chains import RetrievalQAWithSourcesChain
 
 # Fetch the API token from the environment variables
-huggingfacehub_api_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+# huggingfacehub_api_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+huggingfacehub_api_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 # Ensure the token is set correctly before proceeding
 if not huggingfacehub_api_token:
