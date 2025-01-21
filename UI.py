@@ -35,7 +35,12 @@ if process_url_clicked:
     st.success('Done!')
     
             
-vector_store = pickle.load(open("/mnt/data/vectors_index.pkl", "rb"))
+# vector_store = pickle.load(open("/mnt/data/vectors_index.pkl", "rb"))
+if "vectors_index" in st.session_state:
+    vector_store = st.session_state.vectors_index
+else:
+    st.warning("Vectors index not available. Please generate it.")
+
 vector_store = vector_store.as_retriever()
 chains = create_llm(
     "google/flan-t5-base",
