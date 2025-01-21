@@ -35,7 +35,7 @@ if process_url_clicked:
     st.success('Done!')
     
             
-vector_store = pickle.load(open("/Users/nischaoj/Python_Work_DIR/Search_Engine_doc_upload/vectors_index.pkl", "rb"))
+vector_store = pickle.load(open("/mnt/data/vectors_index.pkl", "rb"))
 vector_store = vector_store.as_retriever()
 chains = create_llm(
     "google/flan-t5-base",
