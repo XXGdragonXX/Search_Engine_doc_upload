@@ -49,6 +49,7 @@ def embedding_model(urls):
         model_name="bert-base-nli-mean-tokens"
     )
     vectors_index = FAISS.from_documents(url_data, embeddings)
+    print(f"This is the vector index : {vectors_index}")
     # file_path = "/mnt/data/vectors_index.pkl"
     # if os.path.exists(file_path):
     #     # If file exists, remove it to regenerate
