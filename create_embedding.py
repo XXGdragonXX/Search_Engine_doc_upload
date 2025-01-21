@@ -9,8 +9,12 @@ import nltk
 
 nltk.download('averaged_perceptron_tagger')
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] ='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'
+# Fetch the API token from the environment variables
+huggingfacehub_api_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
+# Ensure the token is set correctly before proceeding
+if not huggingfacehub_api_token:
+    raise ValueError("HUGGINGFACEHUB_API_TOKEN is not set. Please set it in the environment.")
 
 def create_url_loader(urls):
     loader = UnstructuredURLLoader(
@@ -45,10 +49,10 @@ def create_embedding_model(urls):
         model_name="bert-base-nli-mean-tokens"
     )
     vectors_index = FAISS.from_documents(url_data, embeddings)
-    if os.path.exists("/Users/nischaoj/Python_Work_DIR/Search_Engine_doc_upload/vectors_index.pkl"):
-        os.remove("/Users/nischaoj/Python_Work_DIR/Search_Engine_doc_upload/vectors_index.pkl") 
+    if os.path.exists("/mnt/data/vectors_index.pkl"):
+        os.remove("/mnt/data/vectors_index.pkl") 
 
-    with open("/Users/nischaoj/Python_Work_DIR/Search_Engine_doc_upload/vectors_index.pkl", "wb") as f:
+    with open("/mnt/data/vectors_index.pkl"", "wb") as f:
         pickle.dump(vectors_index, f)
     
         
