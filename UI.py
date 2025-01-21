@@ -30,16 +30,17 @@ if process_url_clicked:
     
     with st.spinner("Loading Data from URLs..."):
            
-        embedding_model(urls)
+        message = embedding_model(urls)
         
     st.success('Done!')
     
-            
+print(message) 
 # vector_store = pickle.load(open("/mnt/data/vectors_index.pkl", "rb"))
-if "vectors_index" in st.session_state:
+try:
     vector_store = st.session_state.vectors_index
-else:
-    st.warning("Vectors index not available. Please generate it.")
+except Exception as e:
+    print(e)
+    
 
 vector_store = vector_store.as_retriever()
 chains = create_llm(
