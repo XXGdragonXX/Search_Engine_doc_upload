@@ -2,7 +2,7 @@ import streamlit as st
 import os
 from model import create_llm
 import pickle
-from create_embedding import create_embedding_model
+from create_embedding import embedding_model
 import nltk
 
 
