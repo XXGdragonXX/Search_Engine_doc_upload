@@ -7,6 +7,7 @@ import streamlit as st
 import pickle
 import os
 import nltk
+import json
 
 nltk.download('averaged_perceptron_tagger')
 
