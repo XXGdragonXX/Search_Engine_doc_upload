@@ -46,10 +46,28 @@ if process_url_clicked:
     st.success('Done!')
     
 # vector_store = pickle.load(open("/mnt/data/vectors_index.pkl", "rb"))
+# try:
+#     vector_store = st.session_state.vectors_index
+# except Exception as e:
+#     print(e)
+
+def load_pickle_from_gcs(bucket_name, blob_name):
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    
+    # Download the pickle file content from GCS
+    pickle_data = blob.download_as_string()
+    
+    # Deserialize the data
+    data = pickle.loads(pickle_data)
+    return data
+
 try:
-    vector_store = st.session_state.vectors_index
-except Exception as e:
-    print(e)
+    vector_store = load_pickle_from_gcs("project_bucket_1998","document_embedding/vectors_index.pkl")
+
+except Exception as 
+
     
 
 vector_store = vector_store.as_retriever()
