@@ -4,6 +4,7 @@ from model import create_llm
 import pickle
 from create_embedding import embedding_model
 import nltk
+import json
 
 from google.cloud import storage
 from google.oauth2 import service_account
