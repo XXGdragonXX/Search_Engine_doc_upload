@@ -66,7 +66,8 @@ def load_pickle_from_gcs(bucket_name, blob_name):
 try:
     vector_store = load_pickle_from_gcs("project_bucket_1998","document_embedding/vectors_index.pkl")
 
-except Exception as 
+except Exception as e:
+    print(e)
 
     
 
