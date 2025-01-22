@@ -10,6 +10,18 @@ import nltk
 
 nltk.download('averaged_perceptron_tagger')
 
+import json
+import os
+from google.cloud import storage
+from google.oauth2 import service_account
+
+# Load the service account key from the environment variable
+service_account_info = json.loads(os.environ['GCP_SERVICE_ACCOUNT'])
+credentials = service_account.Credentials.from_service_account_info(service_account_info)
+
+# Initialize the Google Cloud Storage client
+client = storage.Client(credentials=credentials)
+
 # Fetch the API token from the environment variables
 huggingfacehub_api_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
@@ -41,6 +53,16 @@ def split_text_into_chunks(data):
     print(f"-------------{len(chunks)}------------")
     return chunks
 
+def upload_pickle_to_gcs(local_file_path, bucket_name, blob_name):
+    # Create a GCS client
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    
+    # Upload the pickle file to GCS
+    blob.upload_from_filename(local_file_path)
+    print(f"Pickle file uploaded to {bucket_name}/{blob_name}")
+
 
 
 def embedding_model(urls):
@@ -57,9 +79,13 @@ def embedding_model(urls):
     #     os.remove(file_path)
 
     # # Save the vectors index as a pickle file
-    # with open(file_path, "wb") as f:
-    #     pickle.dump(vectors_index, f)
-    st.session_state.vectors_index = vectors_index
+    temp_dir = './tmp'
+    os.makedirs(temp_dir, exist_ok=True)
+    file_path = os.path.join(temp_dir,vectors_index.pkl)
+    with open(file_path, "wb") as f:
+        pickle.dump(vectors_index, f)
+    upload_pickle_to_gcs(file_path, 'project_bucket_1998', 'project_bucket_1998/document_embedding')
+    # st.session_state.vectors_index = vectors_index
 
     return f"Vectors Index created and saved to session state"
 
