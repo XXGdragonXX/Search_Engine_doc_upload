@@ -5,6 +5,16 @@ import pickle
 from create_embedding import embedding_model
 import nltk
 
+from google.cloud import storage
+from google.oauth2 import service_account
+
+# Load the service account key from the environment variable
+service_account_info = json.loads(os.environ['GCP_SERVICE_ACCOUNT'])
+credentials = service_account.Credentials.from_service_account_info(service_account_info)
+
+# Initialize the Google Cloud Storage client
+client = storage.Client(credentials=credentials)
+
 
 
 nltk.download('punkt')
